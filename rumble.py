@@ -14,7 +14,7 @@ else:
 
 rumble_query = str(sys.argv[1:])
 
-rumble_url = "https://api.smat-app.com/content?term=" + rumble_query + "&limit=10&site=rumble_video&since=2022-03-22T19%3A12%3A30.802480&until=2022-05-22T19%3A12%3A30.802480&esquery=false&sortdesc=false"
+rumble_url = "https://api.smat-app.com/content?term=" + rumble_query + "&limit=20&site=rumble_video&since=2022-03-22T19%3A12%3A30.802480&until=2022-05-22T19%3A12%3A30.802480&esquery=false&sortdesc=false"
 
 rumble_response = requests.get(rumble_url)
 
