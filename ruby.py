@@ -5,9 +5,9 @@ import argparse
 from colorama import Fore, Back, Style, init
 import csv
 import os.path
-from bitchute import *
-from rumble import *
-from youtube import *
+from scripts.bitchute import *
+from scripts.rumble import *
+from scripts.youtube import *
 
 init(autoreset=True)
 
