@@ -11,7 +11,7 @@ from youtube import *
 
 init(autoreset=True)
 
-earl = Fore.RED + r"""
+ruby = Fore.RED + r"""
    ▄████████ ███    █▄  ▀█████████▄  ▄██   ▄
   ███    ███ ███    ███   ███    ███ ███   ██▄
   ███    ███ ███    ███   ███    ███ ███▄▄▄███
@@ -23,7 +23,7 @@ earl = Fore.RED + r"""
   ███    ███
 """
 
-print(earl)
+print(ruby)
 print(" A Rumble, Bitchute, and YouTube scraper\n")
 print(" By: Jake Creps \n")
 
