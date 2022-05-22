@@ -1,4 +1,4 @@
 # ruby
 A Rumble, BitChute, and YouTube Scraper
 
-![Alt text](../ruby.png)
+![Alt text](./ruby.png)
