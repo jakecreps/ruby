@@ -1,7 +1,7 @@
 # Ruby
 A **Ru**mble, **B**itChute, and **Y**ouTube Scraper
 
-![Alt text](./ruby.png)
+![Alt text](./img/ruby.png)
 
 ## How to use
 
