@@ -1,0 +1,7 @@
+requests
+colorama
+json
+sys
+csv
+os.path
+argparse
