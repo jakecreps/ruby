@@ -5,39 +5,46 @@ import argparse
 import csv
 import os.path
 
-file_exists = os.path.exists('search.csv')
+def bitchute():
+    file_exists = os.path.exists('search.csv')
 
-if file_exists:
-    header_added = True
-else:
-    header_added = False
+    if file_exists:
+        header_added = True
+    else:
+        header_added = False
 
-smat_query = str(sys.argv[1:])
+    smat_query = str(sys.argv[1:])
 
-smat_url = "https://api.smat-app.com/content?term=" + smat_query + "&limit=20&site=bitchute_video&since=2022-03-22T19%3A12%3A30.802480&until=2022-05-22T19%3A12%3A30.802480&esquery=false&sortdesc=false"
+    limit = "50" #change this variable to get more or less results
 
-smat_response = requests.get(smat_url)
+    smat_url = "https://api.smat-app.com/content?term=" + smat_query + "&limit=" + limit + "&site=bitchute_video&since=2022-03-22T19%3A12%3A30.802480&until=2022-05-22T19%3A12%3A30.802480&esquery=false&sortdesc=false"
 
-smat_json_data = smat_response.json()
+    smat_response = requests.get(smat_url)
 
-hits = smat_json_data["hits"]["hits"]
+    smat_json_data = smat_response.json()
 
-for videos in hits:
-    try:
-        usernames = videos["_source"]["meta"]["channel_id"]
-        authors = videos["_source"]["channel"]
-        urls = videos["_source"]["canonical"]
-        titles = videos["_source"]["title"]
-    except:
-        pass
+    hits = smat_json_data["hits"]["hits"]
 
-    try:
-        with open('search.csv', 'a') as csvfile:
-            fieldnames = ['author', 'usernames', 'title', 'author_url', 'url']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            if not header_added:
-                writer.writeheader()
-                header_added = True
-            writer.writerow({'author': authors, 'usernames': usernames, 'title': titles, 'author_url': '', 'url': urls})
-    except:
-        pass
+    for videos in hits:
+        try:
+            usernames = videos["_source"]["meta"]["channel_id"]
+            print(" Username: " + usernames)
+            authors = videos["_source"]["channel"]
+            print(" Author: " + authors)
+            titles = videos["_source"]["title"]
+            print(" Title: " + titles)
+            urls = videos["_source"]["canonical"]
+            print(" URL: " + urls + "\n")
+        except:
+            pass
+
+        try:
+            with open('search.csv', 'a') as csvfile:
+                fieldnames = ['author', 'usernames', 'title', 'author_url', 'url']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                if not header_added:
+                    writer.writeheader()
+                    header_added = True
+                writer.writerow({'author': authors, 'usernames': usernames, 'title': titles, 'author_url': '', 'url': urls})
+        except:
+            pass
