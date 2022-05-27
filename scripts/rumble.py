@@ -5,39 +5,46 @@ import argparse
 import csv
 import os.path
 
-file_exists = os.path.exists('search.csv')
+def rumble():
+    file_exists = os.path.exists('search.csv')
 
-if file_exists:
-    header_added = True
-else:
-    header_added = False
+    if file_exists:
+        header_added = True
+    else:
+        header_added = False
 
-rumble_query = str(sys.argv[1:])
+    rumble_query = str(sys.argv[1:])
 
-rumble_url = "https://api.smat-app.com/content?term=" + rumble_query + "&limit=10&site=rumble_video&since=2022-03-22T19%3A12%3A30.802480&until=2022-05-22T19%3A12%3A30.802480&esquery=false&sortdesc=false"
+    limit = "50" #change this variable to get more or less results
 
-rumble_response = requests.get(rumble_url)
+    rumble_url = "https://api.smat-app.com/content?term=" + rumble_query + "&limit=" + limit + "&site=rumble_video&since=2022-03-22T19%3A12%3A30.802480&until=2022-05-22T19%3A12%3A30.802480&esquery=false&sortdesc=false"
 
-rumble_json_data = rumble_response.json()
+    rumble_response = requests.get(rumble_url)
 
-hits = rumble_json_data["hits"]["hits"]
+    rumble_json_data = rumble_response.json()
 
-for videos in hits:
-    try:
-        usernames = videos["_source"]["channel_id"]
-        authors = videos["_source"]["username"]
-        urls = videos["_source"]["canonical"]
-        titles = videos["_source"]["metadata"]["name"]
-    except:
-        pass
+    hits = rumble_json_data["hits"]["hits"]
 
-    try:
-        with open('search.csv', 'a') as csvfile:
-            fieldnames = ['author', 'usernames', 'title', 'author_url', 'url']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            if not header_added:
-                writer.writeheader()
-                header_added = True
-            writer.writerow({'author': authors, 'usernames': usernames, 'title': titles, 'author_url': '', 'url': urls})
-    except:
-        pass
+    for videos in hits:
+        try:
+            usernames = videos["_source"]["channel_id"]
+            print(" Username: " + usernames)
+            authors = videos["_source"]["username"]
+            print(" Author: " + authors)
+            titles = videos["_source"]["metadata"]["name"]
+            print(" Title: " + titles)
+            urls = videos["_source"]["canonical"]
+            print(" URL: " + urls + "\n")
+        except:
+            pass
+
+        try:
+            with open('search.csv', 'a') as csvfile:
+                fieldnames = ['author', 'usernames', 'title', 'author_url', 'url']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                if not header_added:
+                    writer.writeheader()
+                    header_added = True
+                writer.writerow({'author': authors, 'usernames': usernames, 'title': titles, 'author_url': '', 'url': urls})
+        except:
+            pass
