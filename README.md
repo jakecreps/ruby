@@ -1,5 +1,5 @@
 # Ruby
-A **Ru**mble, **B**itChute, and **Y**ouTube Scraper
+A **Ru**mble, **B**itChute, and **Y**ouTube scraper
 
 ![Alt text](./img/ruby.png)
 
