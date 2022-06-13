@@ -26,7 +26,6 @@ ruby = Fore.RED + r"""
 
 print(ruby)
 print(" A Rumble, Bitchute, and YouTube scraper and search engine \n")
-print(" By: Jake Creps \n")
 print(Fore.RED + " Ruby is searching... \n")
 time.sleep(2)
 
